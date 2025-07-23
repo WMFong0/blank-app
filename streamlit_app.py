@@ -9,7 +9,7 @@ elif st.context.locale == 'zh-Hant':
 else:
   st.write("Sorry. As of the current moment, we do not have any schedule supporting your preferred language. \n"
   +"The only language we support is English at the moment.")
-st.markdown("Welcome using Weather Report System. <br>This system uses Hong Kong Observatory Data to report data.")
+st.markdown("Welcome using Weather Report System. <br>This system uses Hong Kong Observatory Data to report data.", unsafe_allow_html = True)
 
 with st.popover("Current District Input Panel"):
     District = st.text_input(
