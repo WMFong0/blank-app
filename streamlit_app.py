@@ -9,7 +9,7 @@ with st.popover("Input Panel"):
         placeholder = "E.g. Tuen Mun",
     )
 
-st.header(f"Weather Report in {District}" if District != None else f"Weather App")
+st.header(f"Weather Report in {District}" if District != "E.g. Tuen Mun" else f"Weather App")
 
 
 '''
