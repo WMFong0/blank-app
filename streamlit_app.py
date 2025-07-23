@@ -11,5 +11,5 @@ with tab1:
         placeholder = "Enter your Current District",
     )
 with tab2:
-    st.header(f"Weather Report in {test}" if District != None else f"Weather App")  # Using f-string for string interpolation
+    st.header(f"Weather Report in {District}" if District != None else f"Weather App")  # Using f-string for string interpolation
     # Do this this this
