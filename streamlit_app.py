@@ -17,6 +17,8 @@ with st.popover("Input Panel"):
         placeholder = "E.g. Tuen Mun",
     )
 
+display_district = "Weather Report" if not District else f"Weather Report in {District}"
+st.header(display_district)
 st.header(f"Weather Report" if District == "None" else f"Weather Report in {District}")
 
 
