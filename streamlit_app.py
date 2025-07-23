@@ -5,7 +5,6 @@ with st.popover("Input Panel"):
             "This system uses Hong Kong Observatory Data to report data.")
     District = st.text_input(
         "Enter your Current District",
-        label_visibility = "collapsed",
         placeholder = "E.g. Tuen Mun",
     )
 
