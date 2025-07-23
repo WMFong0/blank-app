@@ -3,11 +3,11 @@ import streamlit as st
 
 base = st.context.theme.type
 if st.context.locale.startswith("en"):
-  st.write("Hello there.") # The merely supported language atm
+  st.markdown("Hello there.") # The merely supported language atm
 elif st.context.locale == 'zh-Hant':
-  st.write("Sorry. We will try to provide support for Traditional Chinese as soon as possible.") # Will be provided later
+  st.markdown("Sorry. We will try to provide support for Traditional Chinese as soon as possible.") # Will be provided later
 else:
-  st.write("Sorry. As of the current moment, we do not have any schedule supporting your preferred language. \n"
+  st.markdown("Sorry. As of the current moment, we do not have any schedule supporting your preferred language. \n"
   +"The only language we support is English at the moment.")
 st.markdown("Welcome using Weather Report System. <br>This system uses Hong Kong Observatory Data to report data.", unsafe_allow_html = True)
 
