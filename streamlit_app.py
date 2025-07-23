@@ -1,10 +1,16 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+tab1, tab2 = st.tabs(["Input Page", "Result Page"])
 
-test = st.text_input("Movie title", "Life of Brian")
-st.write("The current movie title is", test)
-st.title(f"A Movie of {test}")  # Using f-string for string interpolation
+With tab1:
+    st.header("Welcome using Weather Report System." + "\n" +
+            "This system uses Hong Kong Observatory Data to report data.")
+    District = st.text_input(
+        "Enter some text 👇",
+        label_visibility = "collapsed",
+        placeholder = "Enter your Current District",
+    )
+
+With tab2:
+    st.header(f"Weather Report in {test}" if test != None else f"Weather App")  # Using f-string for string interpolation
+    # Do this this this
