@@ -24,7 +24,8 @@ if not District:
   st.header("Please provide your current district using the Input Panel. Thanks.")
 else:
   current_datetime = datetime.datetime.now().astimezone(datetime.timezone(datetime.timedelta(hours=8))); # Enforce Hong Kong Timezone
-  st.write("Here are the information we gathered from HKO")
+  st.write("Here are the information we gathered from HKO
+  ")
   st.markdown(current_datetime.strftime('Today is %Y/%m/%d. <br>Current Hong Kong Time is %H:%M:%S<br>'), unsafe_allow_html = True)
 
 '''
