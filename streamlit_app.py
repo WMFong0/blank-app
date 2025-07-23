@@ -17,10 +17,10 @@ with st.popover("Input Panel"):
         placeholder = "E.g. Tuen Mun",
     )
 
-st.header(f"Weather Report" if not District else f"Weather Report in {District}")
+st.title(f"Weather Report" if not District else f"Weather Report in {District}")
 
 if not District:
-  st.title("Please provide your current district using the Input Panel. Thanks.")
+  st.header("Please provide your current district using the Input Panel. Thanks.")
 else:
   st.write("Here are the information we gathered from HKO")
   
