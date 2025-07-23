@@ -25,9 +25,9 @@ if not District:
 else:
   current_datetime = datetime.datetime.now().astimezone(datetime.timezone(datetime.timedelta(hours=8))); # Enforce Hong Kong Timezone
   st.write("Here are the information we gathered from HKO")
-  st.write(current_datetime.strftime('Today is %Y/%m/%d. 
-  Current Hong Kong Time is %H:%M:%S
-  '))
+  st.write(current_datetime.strftime('Today is %Y/%m/%d. ')
+  st.write(current_datetime.strftime('Current Hong Kong Time is %H:%M:%S'))
+  st.write(' ')
 
 '''
 tab1, tab2 = st.tabs(["Input Page", "Result Page"])
