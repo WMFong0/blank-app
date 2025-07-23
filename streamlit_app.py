@@ -1,3 +1,4 @@
+import datetime
 import streamlit as st
 
 base = st.context.theme.type
@@ -23,7 +24,7 @@ if not District:
   st.header("Please provide your current district using the Input Panel. Thanks.")
 else:
   st.write("Here are the information we gathered from HKO")
-  
+  st.write(current_datetime.strftime('Today is %Y/%m/%d. \nCurrent Hong Kong Time is %H:%M:%S\n')
 
 '''
 tab1, tab2 = st.tabs(["Input Page", "Result Page"])
