@@ -20,8 +20,10 @@ with st.popover("Input Panel"):
 st.header(f"Weather Report" if not District else f"Weather Report in {District}")
 
 if not District:
-  st.header("Please provide your current district using the Input Panel. Thanks.")
-
+  st.title("Please provide your current district using the Input Panel. Thanks.")
+else:
+  st.write("Here are the information we gathered from HKO")
+  
 
 '''
 tab1, tab2 = st.tabs(["Input Page", "Result Page"])
