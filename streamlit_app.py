@@ -4,12 +4,13 @@ with st.popover("Input Panel"):
     st.markdown("Welcome using Weather Report System." + "\n" +
             "This system uses Hong Kong Observatory Data to report data.")
     District = st.text_input(
-        "Enter some text 👇",
+        "Enter your Current District",
         label_visibility = "collapsed",
-        placeholder = "Enter your Current District",
+        placeholder = "E.g. Tuen Mun",
     )
 
 st.header(f"Weather Report in {District}" if District != None else f"Weather App")
+
 
 '''
 tab1, tab2 = st.tabs(["Input Page", "Result Page"])
