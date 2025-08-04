@@ -74,9 +74,6 @@ def Clock():
             st.rerun()
         return
 
-    # Create an empty placeholder for the clock
-    clock_container = st.empty()
-
     # JavaScript code for the real-time clock
     js_code = f"""
     <div class="time-container">
@@ -112,8 +109,8 @@ def Clock():
     </script>
     """
 
-    # Embed the JavaScript clock in the placeholder
-    clock_container.html(js_code, height=600)
+    # Render the JavaScript clock directly
+    st.components.v1.html(js_code, height=600)
 
     # Back button to return to timezone selection
     if st.button("Back to Timezone Selection"):
