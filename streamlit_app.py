@@ -1,6 +1,3 @@
-import datetime
-import streamlit as st
-
 import streamlit as st
 import pytz
 
@@ -31,10 +28,11 @@ def Clock():
             st.rerun()
         return
 
-    # JavaScript code for the real-time clock
+    # JavaScript code for the real-time clock with time and timezone on separate lines
     js_code = f"""
-    <div id="clock" style="font-size: 48px; font-family: 'Orbitron', sans-serif; color: #66ff99; text-align: center; padding: 20px;">
-        Loading...
+    <div style="font-family: 'Orbitron', sans-serif; color: #66ff99; text-align: center; padding: 20px;">
+        <div id="time" style="font-size: 48px;"></div>
+        <div id="timezone" style="font-size: 24px; margin-top: 10px;"></div>
     </div>
     <script>
         function updateClock() {{
@@ -47,7 +45,8 @@ def Clock():
                 hour12: true
             }};
             const timeString = now.toLocaleTimeString('en-US', options);
-            document.getElementById('clock').innerText = `{st.session_state.timezone}: ${{timeString}}`;
+            document.getElementById('time').innerText = timeString;
+            document.getElementById('timezone').innerText = '{st.session_state.timezone}';
         }}
         updateClock(); // Initial call
         setInterval(updateClock, 1000); // Update every second
@@ -56,7 +55,7 @@ def Clock():
     """
 
     # Embed the JavaScript clock in Streamlit
-    st.components.v1.html(js_code, height=150)
+    st.components.v1.html(js_code, height=200)
 
     # Back button to return to timezone selection
     if st.button("Back to Timezone Selection"):
