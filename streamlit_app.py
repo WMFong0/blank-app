@@ -8,6 +8,52 @@ if "inside_clock" not in st.session_state:
 if "timezone" not in st.session_state:
     st.session_state.timezone = None
 
+# Apply custom CSS for the clock UI
+st.markdown("""
+<style>
+html, body {
+    overflow: hidden !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.time-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+.big-time {
+    font-size: 20vw !important;
+    font-family: monospace;
+    line-height: 1;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+.date-header {
+    font-size: 3vw !important;
+    margin-bottom: 2vh;
+    color: #666;
+}
+.timezone-label {
+    font-size: 2vw !important;
+    color: #888;
+    margin-top: 1vh;
+}
+.affiliate-label {
+    font-size: 3vw !important;
+    margin-bottom: 1vh;
+    color: #777;
+}
+</style>
+""", unsafe_allow_html=True)
+
 def Clock():
     st.title("Live Clock")
 
@@ -28,50 +74,61 @@ def Clock():
             st.rerun()
         return
 
-    # JavaScript code for the real-time clock with time and timezone on separate lines
+    # Create an empty placeholder for the clock
+    clock_container = st.empty()
+
+    # JavaScript code for the real-time clock
     js_code = f"""
-    <div style="font-family: 'Orbitron', sans-serif; color: #66ff99; text-align: center; padding: 20px;">
-        <div id="time" style="font-size: 48px;"></div>
-        <div id="timezone" style="font-size: 24px; margin-top: 10px;"></div>
+    <div class="time-container">
+        <div id="date-header" class="date-header"></div>
+        <div id="time" class="big-time"></div>
+        <div id="timezone" class="timezone-label"></div>
     </div>
     <script>
         function updateClock() {{
             const now = new Date();
-            const options = {{
+            const timeOptions = {{
                 timeZone: '{st.session_state.timezone}',
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
-                hour12: true
+                hour12: false
             }};
-            const timeString = now.toLocaleTimeString('en-US', options);
+            const dateOptions = {{
+                timeZone: '{st.session_state.timezone}',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit'
+            }};
+            const timeString = now.toLocaleTimeString('en-US', timeOptions);
+            const dateString = now.toLocaleDateString('en-US', dateOptions);
             document.getElementById('time').innerText = timeString;
-            document.getElementById('timezone').innerText = '{st.session_state.timezone}';
+            document.getElementById('date-header').innerText = dateString;
+            document.getElementById('timezone').innerText = '{st.session_state.timezone} Time';
         }}
         updateClock(); // Initial call
         setInterval(updateClock, 1000); // Update every second
     </script>
-    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     """
 
-    # Embed the JavaScript clock in Streamlit
-    st.components.v1.html(js_code, height=200)
+    # Embed the JavaScript clock in the placeholder
+    clock_container.html(js_code, height=600)
 
     # Back button to return to timezone selection
     if st.button("Back to Timezone Selection"):
         st.session_state.inside_clock = False
         st.rerun()
 
-# Main app logic
+# Check boolean directly instead of using `in`
 if not st.session_state.inside_clock:
-    st.title("Timezone Selection")
-    selected_timezone = st.selectbox("Select your timezone", [None] + list(pytz.all_timezones), index=0)
+    selected_timezone = st.selectbox("Select your timezone", [None] + list(pytz.all_timezones))
     st.write(f"Selected: {selected_timezone}")
 
-    # Disable button if no timezone is selected
-    if st.button("Go to Live Clock", disabled=not selected_timezone):
-        st.session_state.timezone = selected_timezone
-        st.session_state.inside_clock = True
-        st.rerun()
+    if st.button(f"Go to {selected_timezone}'s Live Clock" if selected_timezone else "Please select your timezone first", disabled=not selected_timezone):
+        if selected_timezone:
+            st.session_state.timezone = selected_timezone
+            st.session_state.inside_clock = True
+            st.rerun()
 else:
     Clock()
